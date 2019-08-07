@@ -1,0 +1,9 @@
+<svg version="1.0" xmlns="http://www.w3.org/2000/svg"
+ width="25" height="25" viewBox="0 0 25 25"
+ preserveAspectRatio="xMidYMid meet">
+	<text x="0" y="23" fill="#bbb" font-size="30" font-weight="200" font-family="'Mukta',sans-serif">T</text>
+    <rect x="11" y="11" width="13" height="10"
+  style="fill:none;stroke:lightblue;stroke-width:1;" />
+    <text x="12" y="19" fill="lightblue" font-size="7" font-weight="200" font-family="'Mukta',sans-serif">M</text>
+    <text x="18" y="19" fill="lightblue" font-size="7" font-weight="200" font-family="'Mukta',sans-serif">D</text>
+</svg>

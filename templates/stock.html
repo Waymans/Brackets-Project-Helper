@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<meta name="description" content="A brief page description">
+		<meta name="keywords" content="html,cheatsheet" />
+		<title>Title</title>
+		<link rel="apple-touch-icon" href="apple-touch-icon.png">
+		<link type="text/css" rel="stylesheet" href="./style.css">
+		<script type="text/javascript" src="./index.js" defer></script>
+	</head>
+	<body>
+		<header>
+			<div id="logo">HTML</div>
+			<nav>  
+				<ul>
+					<li><a href="/">Home</a>
+					<li><a href="/link">Page</a>
+				</ul>
+			</nav>
+		</header>
+		<main role="main">
+			<article>
+				<h2>Title 1</h2>
+				<p>Content 1</p>
+			</article>
+			<article>
+				<h2>Title 2</h2>
+				<p>Content 2</p>
+			</article>
+		</main>
+		<section>
+			A group of related content
+		</section>
+		<aside>
+			Sidebar
+		</aside>
+		<form action="/action.php" method="post">
+			Name: <input name="name" type="text" /> <br /> 
+			Age: <input max="99" min="1" name="age" step="1" type="number" value="18" /> <br />
+			<select name="gender">
+				<option selected="selected" value="male">Male</option>
+				<option value="female">Female</option>
+			</select><br />
+			<textarea cols="20" name="comments" rows="5">Comment</textarea><br />
+			<label><input name="terms" type="checkbox" value="tandc" />Accept terms</label> <br />
+			<input type="submit" value="Submit" />
+		</form>
+		<table><caption>Phone numbers</caption>
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th colspan="2">Phone</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>John</td>
+					<td>5778541</td>
+					<td>5778553</td>
+				</tr>
+				<tr>
+					<td>Jack</td>
+					<td>5778564</td>
+					<td>5778573</td>
+				</tr>
+			</tbody>
+			<tfoot>
+				<tr>
+					<td>&nbsp;</td>
+					<td>Personal</td>
+					<td>Office</td>
+				</tr>
+			</tfoot>
+		</table>
+		<footer>
+			<p>&copy; 2019</p>
+			<address>
+				Contact <a href="mailto:example@mail.com">me</a>.
+			</address>
+		</footer>
+	</body>
+</html>

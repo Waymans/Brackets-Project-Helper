@@ -1,0 +1,24 @@
+{
+    "title": "Project Helper",
+    "name": "waymans-project-helper",
+    "description": "Create a folder or file anywhere in your project tree. Files come with template options.",
+    "version": "1.0.0",
+    "author": "Waymans (https://github.com/Waymans)",
+    "homepage": "https://github.com/Waymans/Brackets-Project-Helper",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Waymans/Brackets-Project-Helper"
+    },
+    "license": "MIT",
+    "engines": {
+        "brackets": ">=0.42.0"
+    },
+	"keywords": [
+		"template",
+		"file",
+		"folder",
+		"make",
+		"create",
+		"new"
+	]
+}

@@ -1,0 +1,26 @@
+{
+	"//1": "A .json file!",
+	"//2": "This one is an example of a package.json file.",
+	"name": "your-project",
+	"version": "0.0.1",
+	"description": "An example app.",
+	"main": "server.js",
+	"scripts": {
+		"start": "node server.js"
+	},
+	"dependencies": {
+		"express": "^4.16.4"
+	},
+	"engines": {
+		"node": "8.x"
+	},
+	"repository": {
+		"url": "https://github.com/username/repo"
+	},
+	"license": "MIT",
+	"keywords": [
+		"node",
+		"app",
+		"express"
+	]
+}

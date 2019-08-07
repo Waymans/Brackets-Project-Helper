@@ -1,0 +1,24 @@
+#helper-icon {
+    background-image: url(icon/template.svg);
+}
+.big {
+	font-size: 25px;
+	padding: 2rem 0;
+}
+.dialog-title{
+	text-align: center;
+}
+.half {
+	margin-left: 5px;
+	margin-right: 5px;
+	width: calc(50% - 10px);
+	display: inline;
+}
+.half-input {
+	width: calc(50% - 26px);
+}
+.block {
+	text-align: center;
+	display: inline-block;
+	width: 49%;
+}
