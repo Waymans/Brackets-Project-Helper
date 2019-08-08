@@ -3,6 +3,8 @@ Project Helper for Brackets
 
 A nice way of creating new folders and files in a project. Templates can also be used on files.
 
+<img src="./vid/brackets-project-helper.gif">
+
 ## How to use
  - click on the Project Helper icon in the toolbar
  - choose folder or file creation
