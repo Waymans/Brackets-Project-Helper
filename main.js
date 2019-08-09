@@ -1,3 +1,5 @@
+// todo: input validation, SOLID
+
 define(function(require, exports, module) {
     "use strict";
 
@@ -6,18 +8,37 @@ define(function(require, exports, module) {
 		  CommandManager = brackets.getModule("command/CommandManager"),
 		  EditorManager = brackets.getModule("editor/EditorManager"),
 		  Menus = brackets.getModule("command/Menus"),
+		  mustache = brackets.getModule("thirdparty/mustache/mustache"),
+		  ExtensionManagerViewModel = brackets.getModule("extensibility/ExtensionManagerViewModel"),
 		  ExtensionUtils = brackets.getModule('utils/ExtensionUtils'),
 		  NewProjectDialog = require("text!dialog/dialog.html"),
 		  NewFileDialog = require("text!dialog/file.html"),
-		  NewFolderDialog = require("text!dialog/folder.html"),
-		  HTMLTemplate = require("text!templates/stock.html"),
-		  CSSTemplate = require("text!templates/stock.css"),
-		  JSTemplate = require("text!templates/stock.js"),
-		  JSONTemplate = require("text!templates/stock.json"),
-		  MDTemplate = require("text!templates/stock.md");
+		  NewFolderDialog = require("text!dialog/folder.html");
+	
+	const keyBinds = [
+		{ "key": 'Ctrl-Shift-T', "platform": 'win' }, 
+		{ "key": 'Cmd-Shift-T', "platform": 'mac' }
+	];
+	
+	let templatePath;
+	let templateList;
+	
+	function getTemplateList() {
+		brackets.fs.readdir(templatePath + '/templates/', function(err, data){
+			templateList = data;
+		});
+	}
+	
+	function getPathForTemplates() {
+		let installedExts = new ExtensionManagerViewModel.InstalledViewModel();
+		installedExts.initialize().then(function(){
+			templatePath = installedExts.extensions['waymans-project-helper'].installInfo.path;
+			getTemplateList();
+		});
+	}
+	setTimeout(getPathForTemplates, 1000);
 
     function templateHandler(template) {
-        //let editor = EditorManager.getFocusedEditor();
 		let editor = EditorManager.getActiveEditor();
         if (editor) {
             let insertionPos = editor.getCursorPos();
@@ -25,47 +46,29 @@ define(function(require, exports, module) {
         }
     }
 	
-	function choseFile(path) {
-		let decision = Dialogs.showModalDialogUsingTemplate(NewFileDialog),
+	function choseFile(projectRoot) {
+		let decision = Dialogs.showModalDialogUsingTemplate(mustache.render(NewFileDialog, {names: templateList})),
 			modal = decision.getElement(),
 			dirName = $('#name', modal),
 			pathName = $('#path', modal),
 			template = $('#template', modal);
 		
 		decision.done(function(choice){
-			let name = dirName.val(),
-				pathEnd = pathName.val(),
-				temp = template.val();
+			dirName = dirName.val();
+			pathName = pathName.val();
+			template = template.val();
 			
-			if (choice === 'ok') {
-				let doc = ProjectManager.createNewItem(path + pathEnd, name, true, false);
-				// using timeouts because the modal needs to close beforehand
-				switch(temp){
-					case 'index.html':
-						setTimeout(() => templateHandler(HTMLTemplate), 50);
-						break;
-					case 'styles.css':
-						setTimeout(() => templateHandler(CSSTemplate), 50);
-						break;
-					case 'server.js':
-						setTimeout(() => templateHandler(JSTemplate), 50);
-						break;
-					case 'package.json':
-						setTimeout(() => templateHandler(JSONTemplate), 50);
-						break;
-					case 'README.md':
-						setTimeout(() => templateHandler(MDTemplate), 50);
-						break;
-					default:
-						setTimeout(() => templateHandler('Hello, World.'), 50);
-						break;
-				}
-				return new $.Deferred().resolve(doc).promise();
-			}
+			brackets.fs.readdir(
+				projectRoot + '/templates/' + template, function(err, data){
+				brackets.fs.readFile(projectRoot + '/templates/' + template + '/' + data[0], 'utf8', function(err, text){
+					let doc = ProjectManager.createNewItem(projectRoot + pathName, dirName, true, false);
+					setTimeout(() => templateHandler(text), 50);
+				});
+			});
 		});
 	}
 	
-	function choseFolder(path) {
+	function choseFolder(projectRoot) {
 		let decision = Dialogs.showModalDialogUsingTemplate(NewFolderDialog),
 			modal = decision.getElement(),
 			dirName = $('#name', modal),
@@ -73,19 +76,19 @@ define(function(require, exports, module) {
 		
 		decision.done(function(choice){
 			if (choice === 'ok') {
-				ProjectManager.createNewItem(path + pathName.val(), dirName.val(), true, true);
+				ProjectManager.createNewItem(projectRoot + pathName.val(), dirName.val(), true, true);
 			}
 		});
 	}
 	
 	function createFileOrFolder() {
-		let path = ProjectManager.getProjectRoot()._path,
+		let projectRoot = ProjectManager.getProjectRoot()._path,
 			decision = Dialogs.showModalDialogUsingTemplate(NewProjectDialog);
 		decision.done(function(choice){
 			if (choice === 'file') {
-				choseFile(path);
-			} else {
-				choseFolder(path);
+				choseFile(projectRoot);
+			} else if (choice === 'folder') {
+				choseFolder(projectRoot);
 			}
 		});
 	}
@@ -93,10 +96,10 @@ define(function(require, exports, module) {
 	// menu, keybinds, toolbar icon, and css styles
     const menu = Menus.getMenu(Menus.AppMenuBar.FILE_MENU);
 		
-	CommandManager.register('Project Helper', 'waymans.helper', 
-							   () => createFileOrFolder());
-	menu.addMenuItem('waymans.helper', 
-					 [{ "key": 'Ctrl-Shift-T' }, { "key": 'Ctrl-Shift-T' }]);
+	CommandManager.register(
+		'Project Helper', 'waymans.helper', () => createFileOrFolder()
+	);
+	menu.addMenuItem('waymans.helper', keyBinds);
 	
 	ExtensionUtils.loadStyleSheet(module, 'styles/styles.css');
 	

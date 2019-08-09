@@ -4,15 +4,13 @@
 	</div>
 	<div class="modal-body">
 		<input class="half half-input" type="text" placeholder="parentPath/" id="path"/>
-		<input class="half half-input" type="text" placeholder="fileName" id="name"/>
+		<input class="half half-input" type="text" placeholder="fileName" id="name" required/>
 		<label class="half half-input block">File template:</label>
 		<select class="half half-input" id="template" required>
 			<option id="none"></option>
-			<option>index.html</option>
-			<option>styles.css</option>
-			<option>server.js</option>
-			<option>package.json</option>
-			<option>README.md</option>
+			{{#names}}
+				<option>{{.}}</option>
+			{{/names}}
 		</select>                
 	</div>
 	<div class="modal-footer">
