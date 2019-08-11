@@ -1,7 +1,0 @@
-<svg version="1.0" xmlns="http://www.w3.org/2000/svg"
- width="25" height="25" viewBox="0 0 25 25"
- preserveAspectRatio="xMidYMid meet">
-	<text x="0" y="23" fill="#bbb" font-size="30" font-weight="200" font-family="'Mukta',sans-serif">T</text>
-    <polygon points="13,10 22,10 21,20 18,22 14,20" style="fill:dodgerblue;" />
-    <text x="15" y="19" fill="white" font-size="10" font-weight="bold" font-family="'Mukta',sans-serif">3</text>
-</svg>

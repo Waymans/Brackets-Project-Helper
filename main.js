@@ -1,5 +1,3 @@
-// todo: input validation, SOLID
-
 define(function(require, exports, module) {
     "use strict";
 
@@ -11,17 +9,20 @@ define(function(require, exports, module) {
 		  mustache = brackets.getModule("thirdparty/mustache/mustache"),
 		  ExtensionManagerViewModel = brackets.getModule("extensibility/ExtensionManagerViewModel"),
 		  ExtensionUtils = brackets.getModule('utils/ExtensionUtils'),
-		  NewProjectDialog = require("text!dialog/dialog.html"),
-		  NewFileDialog = require("text!dialog/file.html"),
-		  NewFolderDialog = require("text!dialog/folder.html");
+		  ModalDialog = require("text!modal/modal.html");
 	
 	const keyBinds = [
-		{ "key": 'Ctrl-Shift-T', "platform": 'win' }, 
-		{ "key": 'Cmd-Shift-T', "platform": 'mac' }
-	];
+			  { "key": 'Ctrl-Shift-T', "platform": 'win' }, 
+			  { "key": 'Cmd-Shift-T', "platform": 'mac' }
+		  ];
 	
-	let templatePath;
-	let templateList;
+	let projectRoot,
+		templatePath,
+		templateList;
+	
+	function getProjectRoot() {
+		projectRoot = ProjectManager.getProjectRoot()._path;
+	}
 	
 	function getTemplateList() {
 		brackets.fs.readdir(templatePath + '/templates/', function(err, data){
@@ -46,49 +47,47 @@ define(function(require, exports, module) {
         }
     }
 	
-	function choseFile(projectRoot) {
-		let decision = Dialogs.showModalDialogUsingTemplate(mustache.render(NewFileDialog, {names: templateList})),
-			modal = decision.getElement(),
-			dirName = $('#name', modal),
-			pathName = $('#path', modal),
-			template = $('#template', modal);
-		
-		decision.done(function(choice){
-			dirName = dirName.val();
-			pathName = pathName.val();
-			template = template.val();
-			
-			brackets.fs.readdir(
-				projectRoot + '/templates/' + template, function(err, data){
-				brackets.fs.readFile(projectRoot + '/templates/' + template + '/' + data[0], 'utf8', function(err, text){
-					let doc = ProjectManager.createNewItem(projectRoot + pathName, dirName, true, false);
-					setTimeout(() => templateHandler(text), 50);
-				});
+	function folderMaker(folder) {
+		let folders = folder.split('/'),
+			last = folders.splice(folders.length - 1, 1)[0];
+		folders = folders.join('/');
+		ProjectManager.createNewItem(projectRoot + folders, last, true, true);
+	}
+	
+	function fileMaker(folder, file, template) {
+		ProjectManager.createNewItem(projectRoot + folder, file, true, false);
+		brackets.fs.readdir(
+			projectRoot + '/templates/' + template, function(err, data){
+			brackets.fs.readFile(projectRoot + '/templates/' + template + '/' + data[0], 'utf8', function(err, text){
+				setTimeout(() => templateHandler(text), 50);
 			});
 		});
 	}
 	
-	function choseFolder(projectRoot) {
-		let decision = Dialogs.showModalDialogUsingTemplate(NewFolderDialog),
+	function decisionMaker() {
+		getProjectRoot();
+		
+		let decision =
+			Dialogs.showModalDialogUsingTemplate(mustache.render(ModalDialog, {templates: templateList})),
 			modal = decision.getElement(),
-			dirName = $('#name', modal),
-			pathName = $('#path', modal);
+			file = $('#file', modal),
+			folder = $('#folder', modal),
+			template = $('#template', modal);
 		
 		decision.done(function(choice){
 			if (choice === 'ok') {
-				ProjectManager.createNewItem(projectRoot + pathName.val(), dirName.val(), true, true);
-			}
-		});
-	}
-	
-	function createFileOrFolder() {
-		let projectRoot = ProjectManager.getProjectRoot()._path,
-			decision = Dialogs.showModalDialogUsingTemplate(NewProjectDialog);
-		decision.done(function(choice){
-			if (choice === 'file') {
-				choseFile(projectRoot);
-			} else if (choice === 'folder') {
-				choseFolder(projectRoot);
+				file = file.val();
+				folder = folder.val();
+				template = template.val();
+				
+				if (!file) {
+					folderMaker(folder);
+				} else {
+					if (folder) {
+						folderMaker(folder);	
+					}
+					fileMaker(folder, file, template);
+				}
 			}
 		});
 	}
@@ -97,7 +96,7 @@ define(function(require, exports, module) {
     const menu = Menus.getMenu(Menus.AppMenuBar.FILE_MENU);
 		
 	CommandManager.register(
-		'Project Helper', 'waymans.helper', () => createFileOrFolder()
+		'Project Helper', 'waymans.helper', () => decisionMaker()
 	);
 	menu.addMenuItem('waymans.helper', keyBinds);
 	
@@ -108,7 +107,7 @@ define(function(require, exports, module) {
 		.attr('href', '#')
 		.attr('title', 'Project Helper')
 		.on('click', function () {
-			createFileOrFolder();
+			decisionMaker();
 		})
 		.appendTo($('#main-toolbar .buttons'));
 

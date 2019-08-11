@@ -1,10 +1,6 @@
 #helper-icon {
     background-image: url(icon/template.svg);
 }
-.big {
-	font-size: 25px;
-	padding: 2rem 0;
-}
 .dialog-title{
 	text-align: center;
 }
