@@ -5,7 +5,7 @@ Project Helper for Brackets
 
 A nice way of creating new folders and files in a project. Templates can also be used on files.
 
-<img src="./vid/brackets-project-helper.gif">
+<img src="./vid/brackets-helper.gif">
 
 ## Install
 Go to Brackets' Extension Manager(EM) and either:
