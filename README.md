@@ -1,9 +1,6 @@
 Project Helper for Brackets
 ===============================
 
-
-[![Badge](http://pepy.tech/badge/stronghold)](http://pepy.tech/count/stronghold)
-
 :star: Star this on GitHub — it helps!
 
 A nice way of creating new folders and files in a project. Templates can also be used on files.
