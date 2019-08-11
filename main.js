@@ -11,7 +11,11 @@ define(function(require, exports, module) {
 		  ExtensionUtils = brackets.getModule('utils/ExtensionUtils'),
 		  ModalDialog = require("text!modal/modal.html");
 	
-	const keyBinds = [
+	const extension = 'waymans-project-helper',
+		  charset = 'utf8',
+		  tempFolder = '/templates/',
+		  slash = '/',
+		  keyBinds = [
 			  { "key": 'Ctrl-Shift-T', "platform": 'win' }, 
 			  { "key": 'Cmd-Shift-T', "platform": 'mac' }
 		  ];
@@ -25,15 +29,15 @@ define(function(require, exports, module) {
 	}
 	
 	function getTemplateList() {
-		brackets.fs.readdir(templatePath + '/templates/', function(err, data){
+		brackets.fs.readdir(templatePath + tempFolder, function(err, data){
 			templateList = data;
 		});
 	}
 	
 	function getPathForTemplates() {
 		let installedExts = new ExtensionManagerViewModel.InstalledViewModel();
-		installedExts.initialize().then(function(){
-			templatePath = installedExts.extensions['waymans-project-helper'].installInfo.path;
+		installedExts.initialize().then(function() {
+			templatePath = installedExts.extensions[extension].installInfo.path;
 			getTemplateList();
 		});
 	}
@@ -57,8 +61,8 @@ define(function(require, exports, module) {
 	function fileMaker(folder, file, template) {
 		ProjectManager.createNewItem(projectRoot + folder, file, true, false);
 		brackets.fs.readdir(
-			projectRoot + '/templates/' + template, function(err, data){
-			brackets.fs.readFile(projectRoot + '/templates/' + template + '/' + data[0], 'utf8', function(err, text){
+			templatePath + tempFolder + template, function(err, data){
+			brackets.fs.readFile(templatePath + tempFolder + template + slash + data[0], charset, function(err, text){
 				setTimeout(() => templateHandler(text), 50);
 			});
 		});
@@ -112,4 +116,3 @@ define(function(require, exports, module) {
 		.appendTo($('#main-toolbar .buttons'));
 
 });
-
