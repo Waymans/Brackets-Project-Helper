@@ -1,20 +1,20 @@
 <div class="modal">
-	<div class="modal-header">
-		<h1 class="dialog-title">Create</h1>
-	</div>
-	<div class="modal-body">
-		<input class="half half-input" type="text" placeholder="foldernames" id="folder"/>
-		<input class="half half-input" type="text" placeholder="file.ext" id="file" required/>
-		<label class="half half-input block">File template:</label>
-		<select class="half half-input" id="template" required>
-			<option id="none"></option>
-			{{#templates}}
-				<option>{{.}}</option>
-			{{/templates}}
-		</select>                
-	</div>
-	<div class="modal-footer">
-		<button class="dialog-button btn half" data-button-id="cancel">Cancel</button>
-		<button class="dialog-button btn primary half" data-button-id="ok">OK</button>
-	</div>
+    <div class="modal-header">
+        <h1 class="dialog-title">Create</h1>
+    </div>
+    <div class="modal-body">
+        <input class="half half-input" type="text" placeholder="foldernames" id="folder"/>
+        <input class="half half-input" type="text" placeholder="file.ext" id="file" required/>
+        <label class="half half-input block">File template:</label>
+        <select class="half half-input" id="template" required>
+            <option id="none"></option>
+            {{#templates}}
+            <option>{{.}}</option>
+            {{/templates}}
+        </select>
+    </div>
+    <div class="modal-footer">
+        <button class="dialog-button btn half" data-button-id="cancel">Cancel</button>
+        <button class="dialog-button btn primary half" data-button-id="ok">OK</button>
+    </div>
 </div>

@@ -13,13 +13,13 @@
     "engines": {
         "brackets": ">=0.42.0"
     },
-	"keywords": [
-		"template",
-		"file",
-		"folder",
-		"make",
-		"create",
-		"project",
-		"helper"
-	]
+    "keywords": [
+        "template",
+        "file",
+        "folder",
+        "make",
+        "create",
+        "project",
+        "helper"
+    ]
 }
