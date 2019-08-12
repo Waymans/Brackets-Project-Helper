@@ -1,8 +1,6 @@
 Project Helper for Brackets
 ===============================
 
-:star: Star this on GitHub — it helps!
-
 A nice way of creating new folders and files in a project. Templates can also be used on files.
 
 <img src="./vid/brackets-helper.gif">
