@@ -7,13 +7,13 @@ A nice way of creating new folders and files in a project. Templates can also be
 
 <img src="./vid/brackets-helper.gif">
 
-## Install
+## Install Extension
 Go to Brackets' Extension Manager(EM) and either:
 - search by name and install,
 - use this github url and paste to EM link,
 - or upload manually with this repo's zip file.
 
-## Edit
+## Using Extension
 1. click on the Project Helper icon (Ph) in the toolbar
 2. write designated folder name(s) and a file name (one can be optional)
     - if folder names are excluded, the file will be made in the root directory
