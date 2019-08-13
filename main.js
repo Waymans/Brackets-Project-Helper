@@ -9,6 +9,7 @@ define(function(require, exports, module) {
           mustache = brackets.getModule("thirdparty/mustache/mustache"),
           ExtensionManagerViewModel = brackets.getModule("extensibility/ExtensionManagerViewModel"),
           ExtensionUtils = brackets.getModule('utils/ExtensionUtils'),
+          FileViewController = brackets.getModule('project/FileViewController'),
           ModalDialog = require("text!modal/modal.html");
 	
     const EXTENSION_NAME = 'waymans-project-helper',
@@ -100,7 +101,7 @@ define(function(require, exports, module) {
         }
         function conditionalFocus() {
             // focus on file
-            console.log('code me'); // add solution
+            FileViewController.openFileAndAddToWorkingSet(projectRoot + folder + file);
             conditionalTemplate();
         }
         
