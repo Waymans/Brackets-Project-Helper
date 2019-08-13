@@ -5,13 +5,13 @@ A nice way of creating new folders and files in a project. Templates can also be
 
 <img src="./vid/brackets-helper.gif">
 
-## Install Extension
+## Installing the Extension
 Go to Brackets' Extension Manager(EM) and either:
 - search by name and install,
 - use this github url and paste to EM link,
 - or upload manually with this repo's zip file.
 
-## Using Extension
+## Using the Extension
 1. click on the Project Helper icon (Ph) in the toolbar
 2. write designated folder name(s) and a file name (one can be optional)
     - if folder names are excluded, the file will be made in the root directory
@@ -34,8 +34,11 @@ Part II:
 - paste your folder (with the template file) into the `templates` folder,
 - reload with extensions (`Debug > Reload with Extensions`) to see changes.
 
+## Disclaimer
+As this was my first Brackets extension and initially was for personal use it has not been extremely tested. It may not work on all versions/systems or with certain extensions.
+
 ---
 
 ## Notes
-> Removing or changing templates will be understood by knowing the previous section
+> Removing or changing templates will be understood by knowing the `Add a template` section
 > Feel free to clone this repo to change/add templates for your own use or in anyway you see fit.

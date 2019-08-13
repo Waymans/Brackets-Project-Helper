@@ -25,7 +25,7 @@ define(function(require, exports, module) {
         templatePath,
         templateList;
     
-    // gets user extensions folder for templates
+    // gets user extensions folder for templates after reload or install
     setTimeout(function(){
         let installedExts = new ExtensionManagerViewModel.InstalledViewModel();
         installedExts.initialize().then(function() {
@@ -44,12 +44,15 @@ define(function(require, exports, module) {
         });
     }
 
-    function templateHandler(template) {
-        let editor = EditorManager.getActiveEditor();
-        if (editor) {
-            let insertionPos = editor.getCursorPos();
-            editor.document.replaceRange(template, insertionPos);
-        }
+    function templateHandler(template, path) {
+        let focused = FileViewController.openFileAndAddToWorkingSet(projectRoot + path);
+        focused.done(function(){
+            let editor = EditorManager.getActiveEditor();
+            if (editor) {
+                let insertionPos = editor.getCursorPos();
+                editor.document.replaceRange(template, insertionPos);
+            }
+        });
     }
     
     function splitFolders(folder) {
@@ -68,16 +71,16 @@ define(function(require, exports, module) {
         ProjectManager.createNewItem(projectRoot + path.start, path.end, true, true);
     }
 	
-    function getTemplateFolder(template) {
+    function getTemplateFolder(template, path) {
         brackets.fs.readdir(
             templatePath + TEMPLATE_FOLDER + template, function(err, file){
-                getTemplate(template, file[0]);
+                getTemplate(template, file[0], path);
             });
     }
     
-    function getTemplate(template, file) {
+    function getTemplate(template, file, path) {
         brackets.fs.readFile(templatePath + TEMPLATE_FOLDER + template + BACKSLASH + file, CHARSET, function(err, text){
-            setTimeout(() => templateHandler(text), 50);
+            templateHandler(text, path);
         });
     }
     
@@ -85,13 +88,14 @@ define(function(require, exports, module) {
     function conditionals(file, folder, template) {
         let isFolder = folder && typeof folder === 'string',
             isFile = file && typeof file === 'string',
-            isTemplate = file && typeof file === 'string';
+            isTemplate = file && typeof file === 'string',
+            path = isFolder ? folder + BACKSLASH + file : file;
         
         function conditionalTemplate() {
             // if user typed in template
             if (isTemplate) {
                 // paste template
-                getTemplateFolder(template);
+                getTemplateFolder(template, path);
             }
         }
         function conditionalFile() {
@@ -101,7 +105,7 @@ define(function(require, exports, module) {
         }
         function conditionalFocus() {
             // focus on file
-            FileViewController.openFileAndAddToWorkingSet(projectRoot + folder + file);
+            FileViewController.openFileAndAddToWorkingSet(projectRoot + path);
             conditionalTemplate();
         }
         
