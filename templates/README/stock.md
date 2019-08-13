@@ -3,7 +3,7 @@
 One Paragraph of project description goes here
 
 ## Table of Contents
-- [Intro](#getting-started)
+- [Intro](#what-is-it)
 - [Prereqs](#prerequisites)
 - [Install](#installing)
 - [How to Use](#how-to-use)
@@ -15,16 +15,16 @@ One Paragraph of project description goes here
 - [Acknowledgments](#acknowledgments)
 - [To Do](#to-do)
 
-## Getting Started
+## What is it
 
-What is it? Explain what it does.
+Explain what it does.
 
 ### Prerequisites
 
 What you need.
 
 ```
-Give examples
+example
 ```
 
 ### Installing
@@ -34,14 +34,10 @@ How to get it running.
 Say what the step will be
 
 ```
-Give the example
+example
 ```
 
-And repeat
-
-```
-until finished
-```
+Repeat
 
 ## How to Use
 
@@ -51,17 +47,16 @@ Give code examples:
 var someExample = 'explain what it does';
 ```
 
-## Running tests
+### Running tests
 
 Explain how to run the automated tests
 
 ```
-Give an example
+example
 ```
 
 ## Built With
 
-* [Brackets](https://brackets.io/) - Editor
 * [jQuery](https://jquery.com/) - Front end
 * [Node](https://nodejs.org//) - Back end
 
@@ -71,7 +66,7 @@ Please read [CONTRIBUTING.md](https://gist.github.com/your/project/contributing)
 
 ## Authors
 
-* **First Last** - *Initial work* - [Github Profile](https://github.com/)
+* **John Doe** - [Github Username](https://github.com/)
 
 See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
@@ -83,7 +78,6 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 * Thanks to this person
 * Inspiration
-* etc
 
 ## To do
 
