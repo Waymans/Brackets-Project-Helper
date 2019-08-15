@@ -12,7 +12,7 @@ define(function(require, exports, module) {
           FileViewController = brackets.getModule('project/FileViewController'),
           ModalDialog = require("text!modal/modal.html");
 	
-    const EXTENSION_NAME = 'waymans-project-helper',
+    const EXTENSION_NAME = 'waymans-folder-file-maker',
           CHARSET = 'utf8',
           TEMPLATE_FOLDER = '/templates/',
           BACKSLASH = '/',

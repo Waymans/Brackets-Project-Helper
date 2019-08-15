@@ -1,4 +1,4 @@
-Project Helper for Brackets
+Folder & File Maker for Brackets
 ===============================
 
 A nice way of creating new folders and files in a project. Templates can also be used on files.
@@ -30,7 +30,7 @@ Part I:
  
 Part II:
 - in Brackets editor, got to `Help > Show Extensions Folder`,
-- navigate your way to `waymans-project-helper`,
+- navigate your way to `waymans-folder-file-maker`,
 - paste your folder (with the template file) into the `templates` folder,
 - reload with extensions (`Debug > Reload with Extensions`) to see changes.
 
@@ -40,5 +40,5 @@ As this was my first Brackets extension and initially was for personal use it ha
 ---
 
 ## Notes
-> Removing or changing templates will be understood by knowing the `Add a template` section
+> Knowing how to change/remove templates will be understood by knowing the `Add a template` section.
 > Feel free to clone this repo to change/add templates for your own use or in anyway you see fit.

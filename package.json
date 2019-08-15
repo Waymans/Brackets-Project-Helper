@@ -1,13 +1,13 @@
 {
-    "title": "Project Helper",
-    "name": "waymans-project-helper",
-    "description": "A nice UI to create a folder or file anywhere in your project tree. Creating files come with template options.",
+    "title": "Folder & File Maker",
+    "name": "waymans-folder-file-maker",
+    "description": "A nice UI to create a folder or file anywhere in your project tree, including subfolders. Creating files come with template options.",
     "version": "1.0.0",
     "author": "Waymans (https://github.com/Waymans)",
-    "homepage": "https://github.com/Waymans/Brackets-Project-Helper",
+    "homepage": "https://github.com/Waymans/Brackets-Folder-File-Maker",
     "repository": {
         "type": "git",
-        "url": "https://github.com/Waymans/Brackets-Project-Helper"
+        "url": "https://github.com/Waymans/Brackets-Folder-File-Maker"
     },
     "license": "MIT",
     "engines": {
