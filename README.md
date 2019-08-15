@@ -12,7 +12,7 @@ Go to Brackets' Extension Manager(EM) and either:
 - or upload manually with this repo's zip file.
 
 ## Using the Extension
-1. click on the Project Helper icon (Ph) in the toolbar
+1. click on the Folder & File Maker icon (Fm) in the toolbar
 2. write designated folder name(s) and a file name (one can be optional)
     - if folder names are excluded, the file will be made in the root directory
     - if the file name is excluded, the folder(s) will be created if not already
