@@ -173,16 +173,16 @@ define(function(require, exports, module) {
     const menu = Menus.getMenu(Menus.AppMenuBar.FILE_MENU);
 		
     CommandManager.register(
-        'Project Helper', 'waymans.helper', () => decisionMaker()
+        'Folder and File Maker', EXTENSION_NAME, () => decisionMaker()
     );
-    menu.addMenuItem('waymans.helper', KEYBINDS);
+    menu.addMenuItem(EXTENSION_NAME, KEYBINDS);
 	
     ExtensionUtils.loadStyleSheet(module, 'styles/styles.css');
 	
     $(document.createElement('a'))
         .attr('id', 'helper-icon')
         .attr('href', '#')
-        .attr('title', 'Project Helper')
+        .attr('title', 'Folder & File Maker')
         .on('click', function () {
             decisionMaker();
         })

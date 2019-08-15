@@ -18,8 +18,8 @@
         "file",
         "folder",
         "make",
+        "maker",
         "create",
-        "project",
-        "helper"
+        "project"
     ]
 }
